@@ -1,0 +1,158 @@
+10 chapter summary:
+1. Version Control Systems + Git Basics
+2. Basic git usage (80%)
+3. Branching model
+4. Server git\
+5. distributed workflows
+6. github hosting service
+7. advanced commands (reset, binary search, history, etc)
+8. custom git environment config
+9. git and other VCSs
+10. Git internals
+App A. examples of git in various environments
+App B. scripting i.e. lib-git2 and jgit.
+App C. major git commands
+
+CHAPTER 1 GETTING STARTED
+local vcs - copy + paste to new dir, (manual), mac rcs commands
+centralized vcs - single version database server accessible by users
+    -single point of failure
+distributed vcs - (Git, Mercurial, Bazaar or Darcs) - clients mirror the repo. client repos can be copied back to server to restore it.
+    -multiple points of failure.
+    -can setup diff workflows i.e. hierarchical models
+
+Short Git history:
+linux kernel = open source, large scope
+1991-2002, changes passed around as patches and archived files
+2002, linux kernel project began using proprietary DVCS called bitkeeper
+2005 relationship broke down and bitkeeper =/= FOSS
+linus develops own dvcs tool git
+    -speed, simple design, strong support for non-linear development, fully distributed, able to handle large projects efficiently
+
+other vcs - stores info as a list of file-based changes
+-only backs data of individual file as it changes,
+unsure what aligns with what
+could potentially become messy
+
+git - stores data as set of snapshots of mini filesystem
+-every commit = saving state of all files of project at moment
+stores reference to snapshot
+-for efficiency, doesn't duplicate files. Stores links to previous file vers.
+
+nearly every operation is local
+since git uses local snapshots, can edit files, check previous vers and push commits all offline.
+other vcs have some caveat and require a connection to function.
+(i.e. can't push or can't do anything)
+
+git = integrity
+can't edit files without git knowing.
+everything in git is check-summed before being stored and is then referred to by that checksum
+git uses system called SHA-1 hash.
+40 char string opposed to hexadec
+git stores everything in database by hash value, not file name lol
+
+git generally only adds data
+very hard to delete or lose data.
+can experiment without danger of screwing up.
+"undoing things" for more info on this.
+
+Git has The Three States
+committed, modified, and staged.
+committed = safely stored in database
+modified = have changed but not yet committed
+staged = marked modified file to go into next commit snapshot
+
+Git has three main sections
+Git directory - permanently stored snapshot of files in git directory
+Working directory - where you modify files
+Staging area - snapshot of modified files to commit
+
+THE COMMAND LINE
+cli = only place you can run ALL git commands.
+universally available
+expected to know how to use cli to learn git
+
+INSTALLING GIT
+from source - need to have libraries; "curl, zlib, openssl ,expat, libiconv"
+sudo (yum) install curl-devel expat-devel gettext-devel \ openssl-devel perl-devel zlib-devel
+sudo apt-get install libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev
+
+dependencies to add documentation - 
+sudo apt-get install asciidoc xmlto docbook2x
+OR
+sudo yum install asciidoc xmlto docbook2X
+
+or for Fedora/RHEL/RHEL-derivatives, need to do;
+sudo ln -s /usr/bin/db2x_docbook2texi /usr/bin/docbook2x-texi
+
+once you have all necessary dependencies - can get tarball from several places
+then compile and install
+
+tar -zxf git-2.0.0.tar.gz
+cd git-2.0.0
+make configure
+./configure --prefix=/usr
+make all doc info
+sudo make install install-doc install-html install-info
+
+after this is done, can get git via git for updates;
+
+git clone git://git.kernel.org/pub/scm/git/git.git
+
+
+FIRST TIME GIT SETUP
+git config  - tool 
+stored in;
+1. /etc/gitconfig file: --system to git config ; reads+writes from this file specifically
+2. ~/.gitconfig or ~/.config/git/config file ; specific to user, pass --global ; option.
+
+3. git directory .git/config ; file, of whatever repo currently using
+each level overrides previous level - .git/config trupms /etc/gitconfig.
+
+ON windows;
+.gitconfig file in $HOME directory (C:\Users\$User) for most people.
+still looks for /etc/gitconfig, relative to MSys root
+also system level config file at C:\Documents and Settings\All Users\Application Data\Git\config ; on windows xp,
+C:\ProgramData\Git\config on vista and newer
+can only be changed by git config -f <file> as an admin
+
+YOUR IDENTITY
+1. set user + email - every git commit uses this
+git config --global user.name "John"
+git config --global user.email john@gmail.com
+
+--global option = git uses info for anything on the system
+can run cmd without --global for specific projects
+
+YOUR EDITOR
+-should configure default editor 
+git config --global core.editor (editor)
+on windows x86;
+git config --global core.editor "C:/Program Files/Notepad++/notepad++.exe" -multiInst "$*"
+OR
+git config --global core.editor "C:/Program Files/Notepad++/notepad++.exe" -multiInst -notabbar -nosession -noPlugin "$*"
+
+CHECKING YOUR SETTINGS
+git config --list
+
+for specific values;
+git config <key> i.e. git config user.name
+=> outputs Cremeuxe
+
+GETTING HELP
+git help <verb>
+git <verb> --help
+man git<verb>
+
+git help config 
+-manpage help for config command - opens html help page
+
+SUMMARY
+-basic git understanding
+-how diff from centralized vcs
+-working git on system
+
+
+
+CHAPTER 2 - GIT BASICS
+

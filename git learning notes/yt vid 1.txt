@@ -1,0 +1,45 @@
+Here is the first and hopefully final and comprehensive 
+
+ways to use git;
+    command line
+    code editors and ide's
+    =source control panel in vscode
+        gitlens extension
+    gui clients for using git, (gitgui) (git kraken and sourcetree)
+    integrates with other git krake tools (annual fee ew)
+    source tree (free but windows or mac)
+
+using CLI in this first tutorial WOOO
+-gui tools have limitations
+-gui tools aren't always available
+-use the right tool for the job
+
+===
+commands
+
+git config - for editing the git config
+--gloab = for affecting all users
+user.name = for changing user name
+user.email = for changing user email
+-e = opens editor to edit config file
+code = opens default editor (vscode)
+
+user section, core section, filter
+
+end of lines windows; \r (carriage return) \n (line feed)
+end of lines macos/linux \n
+
+configure core.autocrlf = carriage return line feed
+-set property to true to enable the removal and addition of carriage return
+when communicating with the line feed
+set it to input on macos, git removesv carriage returns
+
+==git commandd==
+google git config to learn abt git commands
+
+git config --help = same info/page, just in terminal
+space to go to next page
+q to exit
+
+*try to understand how commands work*
+
